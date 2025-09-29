@@ -1,0 +1,99 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <title>LAB01 IE402.P21 NHÓM 07</title>
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="https://js.arcgis.com/4.28/esri/themes/dark/main.css"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div id="viewDiv"></div>
+
+    <script src="https://js.arcgis.com/4.28/"></script>
+    <script src="script.js"></script>
+
+    <div id="toggleContainer">
+      <button id="toggleBtn">Đổi sang 3D</button>
+      <label>
+        <input type="checkbox" id="toggleRoadColor" checked /><span
+          >Hiển thị màu cho mỗi đường bộ</span
+        ></label
+      >
+      <div>
+        <span>Hiển thị thông tin địa lý cho khu vực: </span>
+        <select onchange="changeDisplayRegion(this.value)">
+          <option value="Cả nước">Cả nước</option>
+          <option value="Đông Bắc Bộ">Đông Bắc Bộ</option>
+          <option value="Tây Bắc Bộ">Tây Bắc Bộ</option>
+          <option value="Đồng bằng sông Hồng">Đồng bằng sông Hồng</option>
+          <option value="Bắc Trung Bộ">Bắc Trung Bộ</option>
+          <option value="Duyên hải Nam Trung Bộ">Duyên hải Nam Trung Bộ</option>
+          <option value="Tây Nguyên">Tây Nguyên</option>
+          <option value="Đông Nam Bộ">Đông Nam Bộ</option>
+          <option value="Đồng bằng sông Cửu Long">
+            Đồng bằng sông Cửu Long
+          </option>
+          <option value="Không khu vực nào">Không khu vực nào</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="basemapSelect">
+      <span>Loại bản đồ: </span>
+      <select onchange="changeBasemap(this.value)">
+        <option value="dark-gray-vector">Dark Gray Vector (mặc định)</option>
+        <option value="streets-navigation-vector">Đường Phố</option>
+        <option value="streets-night-vector">Đường Phố Dạng Tối</option>
+        <option value="streets-relief-vector">Đường Phố + Địa Hình</option>
+        <option value="streets-vector">Đường Phố Dạng Vector</option>
+        <option value="satellite">Vệ Tinh</option>
+        <option value="osm">Open Street Map</option>
+        <option value="topo-vector">Topographic</option>
+        <option value="terrain">Địa Hình</option>
+        <option value="gray-vector">Xám Đơn Giản</option>
+        <option value="hybrid">Hỗn Hợp</option>
+      </select>
+    </div>
+
+    <div id="map-description">
+      <h2>Chú thích</h2>
+      <p>
+        <img src="images/capital.png" alt="biểu tượng thủ đô" />
+        <span>Thủ đô</span>
+      </p>
+      <p>
+        <img
+          src="images/major_city.png"
+          alt="biểu tượng thành phố trực thuộc trung ương"
+        /><span>Thành phố trực thuộc trung ương</span>
+      </p>
+      <p>
+        <img src="images/city.png" alt="biểu tượng thành phố" />
+        <span>Thành phố</span>
+      </p>
+      <p>
+        <img src="images/town.png" alt="biểu tượng thị xã" />
+        <span>Thị xã</span>
+      </p>
+      <p>
+        <img src="images/road.png" alt="biểu tượng đường bộ" />
+        <span>Đường bộ</span>
+      </p>
+      <p>
+        <img src="images/bridge.png" alt="biểu tượng cầu đường bộ" />
+        <span>Cầu đường bộ</span>
+      </p>
+      <p>
+        <img src="images/border.png" alt="biểu tượng biên giới tỉnh" />
+        <span>Biên giới tỉnh</span>
+      </p>
+    </div>
+  </body>
+</html>
