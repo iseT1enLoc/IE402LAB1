@@ -30,13 +30,14 @@ require([
   const mapView = new MapView({
     container: "viewDiv",
     map: map,
-    zoom: 5,
-    center: [108.6208828, 15.6862363],
+    zoom: 10,
+    center: [106.54649392169637, 10.953707766213084],
   });
-
+ 
   // vẽ đa giác tỉnh
   const drawProvince = (data, currentRegion) => {
-    if (data.region === currentRegion || currentRegion === "Cả nước") {
+    console.log(data)
+    if (data.city === currentRegion || currentRegion === "Cả nước") {
       return new Graphic({
         geometry: { type: "polygon", rings: data.rings },
         symbol: {
@@ -53,7 +54,7 @@ require([
         popupTemplate: {
           title: "{title}",
           content:
-            "<a>Diện tích: {area} km²<br>Dân số: {population} người <br>Mật độ: {population_density} người/km²<br>Biển số xe: {plate_number}</a>",
+            "<a>Diện tích: {area} km²<br>Dân số: {population} người <br>Mật độ: {population_density} người/km²</a>",
         },
       });
     } else {
@@ -160,29 +161,38 @@ require([
   // tạo phân lớp điểm
   const pointsLayer = new GraphicsLayer();
 
-  // lấy dữ liệu tọa độ các tỉnh từ ./polygon/provinces/index.json
+  //lấy dữ liệu tọa độ các tỉnh từ ./polygon/provinces/index.json
   function fetchProvinceData(currentRegion) {
-    fetch("polygon/provinces/index.json")
-      .then((res) => res.json())
+    fetch("polygon/wards/ho_chi_minh/index.json")
+      .then((res) => {
+        console.log(res);
+        return res.json();
+      })
       .then((files) =>
         Promise.all(
           files.map((file) =>
-            fetch(`polygon/provinces/${file}`).then((res) => res.json())
+            fetch(`polygon/wards/ho_chi_minh/${file}`).then((res) => res.json())
           )
         )
       )
       .then((data) =>
         data.forEach((obj) =>
           // thêm tỉnh vào phân lớp đa giác
-          polygonsLayer.add(drawProvince(obj, currentRegion))
+          {
+            polygonsLayer.add(drawProvince(obj, currentRegion));
+          }
         )
       );
   }
 
+
   // lấy dữ liệu các đường đi từ ./polygon/roads/index.json
   function fetchRoadData(useDataColors, currentRegion) {
     fetch("polygon/roads/index.json")
-      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        return res.json();
+      })
       .then((files) =>
         Promise.all(
           files.map((file) =>
