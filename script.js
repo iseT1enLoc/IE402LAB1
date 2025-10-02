@@ -1,11 +1,10 @@
 require([
-  "esri/config",
   "esri/Map",
   "esri/views/MapView",
   "esri/views/SceneView",
   "esri/Graphic",
   "esri/layers/GraphicsLayer",
-], function (esriConfig, Map, MapView, SceneView, Graphic, GraphicsLayer) {
+], function (Map, MapView, SceneView, Graphic, GraphicsLayer) {
   // khởi tạo map
   const map = new Map({
     basemap: "dark-gray-vector",
@@ -33,10 +32,9 @@ require([
     zoom: 10,
     center: [106.54649392169637, 10.953707766213084],
   });
- 
-  // vẽ đa giác tỉnh
-  const drawProvince = (data, currentRegion) => {
-    console.log(data)
+
+  // vẽ đa giác phường
+  const drawWard = (data, currentRegion) => {
     if (data.city === currentRegion || currentRegion === "Cả nước") {
       return new Graphic({
         geometry: { type: "polygon", rings: data.rings },
@@ -45,8 +43,8 @@ require([
           color: data.color,
           outline: {
             type: "simple-line",
-            color: [255, 255, 255], // màu biên giới tỉnh
-            width: 1, // độ dày biên giới
+            color: [255, 255, 255, 0.8], // màu biên giới phường
+            width: 1.2, // độ dày biên giới
             style: "dash", // biên giới nét đứt
           },
         },
@@ -82,70 +80,26 @@ require([
         color: useDataColors ? data.color : [255, 180, 0],
         width: 2,
       },
-      attributes: { description: data.description },
-      popupTemplate: { title: "{description}" },
+      attributes: { title: data.title, description: data.description },
       geometry: { type: "polyline", paths: data.paths },
-    });
-  };
-
-  // vẽ điểm thành phố
-  const drawCity = (data) => {
-    let img_url = "images/city.png";
-    let img_width = "8px";
-    let img_height = "8px";
-    if (data.city_type === "Trực thuộc trung ương") {
-      img_url = "images/major_city.png";
-      img_width = "10px";
-      img_height = "10px";
-    } else if (data.city_type === "Thủ đô") {
-      img_url = "images/capital.png";
-      img_width = "18px";
-      img_height = "18px";
-    }
-    return new Graphic({
-      symbol: {
-        type: "picture-marker",
-        url: img_url,
-        width: img_width,
-        height: img_height,
-      },
-      geometry: { type: "point", ...data },
-      attributes: data,
       popupTemplate: {
         title: "{title}",
-        content: "<a>{city_type}<br>Dân số: {population} người</a>",
+        content: "<a>{description}</a>",
       },
     });
   };
 
-  // vẽ điểm thị trấn
-  const drawTown = (data) => {
+  // vẽ Point
+  const drawPoint = (data) => {
     return new Graphic({
       symbol: {
         type: "picture-marker",
-        url: "images/town.png",
-        width: "6px",
-        height: "6px",
-      },
-      geometry: { type: "point", ...data },
-      attributes: data,
-      popupTemplate: {
-        title: "{title}",
-      },
-    });
-  };
-
-  // vẽ điểm cầu
-  const drawBridge = (data) => {
-    return new Graphic({
-      symbol: {
-        type: "picture-marker",
-        url: "images/bridge.png",
-        width: "20px",
-        height: "20px",
+        url: data.url,
+        width: "8px",
+        height: "8px",
       },
 
-      geometry: { type: "point", ...data },
+      geometry: { type: "point", x: data.paths[0], y: data.paths[1] },
       attributes: data,
       popupTemplate: {
         title: "{title}",
@@ -156,8 +110,10 @@ require([
 
   // tạo phân lớp đa giác
   const polygonsLayer = new GraphicsLayer();
-  // tạo phân lớp cung
+
+  // tạo phân lớp đường
   const arcsLayer = new GraphicsLayer();
+
   // tạo phân lớp điểm
   const pointsLayer = new GraphicsLayer();
 
@@ -165,7 +121,6 @@ require([
   function fetchProvinceData(currentRegion) {
     fetch("polygon/wards/ho_chi_minh/index.json")
       .then((res) => {
-        console.log(res);
         return res.json();
       })
       .then((files) =>
@@ -177,26 +132,24 @@ require([
       )
       .then((data) =>
         data.forEach((obj) =>
-          // thêm tỉnh vào phân lớp đa giác
+          // Thêm Phường vào phần đa giác
           {
-            polygonsLayer.add(drawProvince(obj, currentRegion));
+            polygonsLayer.add(drawWard(obj, currentRegion));
           }
         )
       );
   }
 
-
   // lấy dữ liệu các đường đi từ ./polygon/roads/index.json
   function fetchRoadData(useDataColors, currentRegion) {
-    fetch("polygon/roads/index.json")
+    fetch("polygon/roads/Ho_Chi_Minh/index.json")
       .then((res) => {
-        console.log(res);
         return res.json();
       })
       .then((files) =>
         Promise.all(
           files.map((file) =>
-            fetch(`polygon/roads/${file}`).then((res) => res.json())
+            fetch(`polygon/roads/Ho_Chi_Minh/${file}`).then((res) => res.json())
           )
         )
       )
@@ -210,43 +163,24 @@ require([
       );
   }
 
-  // lấy dữ liệu các điểm cầu đường bộ từ ./point/bridges.json
-  function fetchBridgeData(currentRegion) {
-    fetch("point/bridges.json")
+  // lấy dữ liệu các điểm nằm trong các phường của TP. Hồ Chí Minh từ ./point/Ho_Chi_Minh/index.json
+  function fetchPointsData(currentRegion) {
+    fetch("polygon/points/Ho_Chi_Minh/index.json")
       .then((res) => res.json())
+      .then((files) =>
+        Promise.all(
+          files.map((file) =>
+            fetch(`polygon/points/Ho_Chi_Minh/${file}`).then((res) =>
+              res.json()
+            )
+          )
+        )
+      )
       .then((data) =>
         data.forEach((obj) => {
           if (obj.region === currentRegion || currentRegion === "Cả nước") {
-            // thêm cầu vào phân lớp điểm
-            pointsLayer.add(drawBridge(obj));
-          }
-        })
-      );
-  }
-
-  // lấy dữ liệu các điểm thành phố từ ./point/cities.json
-  function fetchCityData(currentRegion) {
-    fetch("point/cities.json")
-      .then((res) => res.json())
-      .then((data) =>
-        data.forEach((obj) => {
-          if (obj.region === currentRegion || currentRegion === "Cả nước") {
-            // thêm thành phố vào phân lớp điểm
-            pointsLayer.add(drawCity(obj));
-          }
-        })
-      );
-  }
-
-  // lấy dữ liệu các điểm thị trấn từ ./point/towns.json
-  function fetchTownData(currentRegion) {
-    fetch("point/towns.json")
-      .then((res) => res.json())
-      .then((data) =>
-        data.forEach((obj) => {
-          if (obj.region === currentRegion || currentRegion === "Cả nước") {
-            // thêm thị xã vào phân lớp điểm
-            pointsLayer.add(drawTown(obj));
+            // thêm điểm vào phân lớp điểm
+            pointsLayer.add(drawPoint(obj));
           }
         })
       );
@@ -263,9 +197,7 @@ require([
   // fetch data lần đầu
   fetchProvinceData(region);
   fetchRoadData(useRoadColor, region);
-  fetchBridgeData(region);
-  fetchCityData(region);
-  fetchTownData(region);
+  fetchPointsData(region);
 
   // thêm các lớp vào map để hiển thị trên bản đồ
   map.addMany([polygonsLayer, arcsLayer, pointsLayer]);
@@ -289,9 +221,7 @@ require([
     // thêm dữ liệu lại để vẽ mới
     fetchProvinceData(currentRegion);
     fetchRoadData(useRoadColor, currentRegion);
-    fetchBridgeData(currentRegion);
-    fetchCityData(currentRegion);
-    fetchTownData(currentRegion);
+    fetchPointsData(currentRegion);
 
     // ghi nhận lại region hiện tại
     region = currentRegion;
