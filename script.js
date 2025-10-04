@@ -29,8 +29,8 @@ require([
   const mapView = new MapView({
     container: "viewDiv",
     map: map,
-    zoom: 10,
-    center: [106.54649392169637, 10.953707766213084],
+    zoom: 12,
+    center: [106.66522107272267, 10.872924838210652],
   });
 
   // vẽ đa giác phường
