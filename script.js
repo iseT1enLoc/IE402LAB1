@@ -29,8 +29,8 @@ require([
   const mapView = new MapView({
     container: "viewDiv",
     map: map,
-    zoom: 10,
-    center: [106.54649392169637, 10.953707766213084],
+    zoom: 12,
+    center: [106.66522107272267, 10.872924838210652],
   });
 
   // vẽ đa giác phường
@@ -78,7 +78,7 @@ require([
       symbol: {
         type: "simple-line",
         color: useDataColors ? data.color : [255, 180, 0],
-        width: 2,
+        width: 3,
       },
       attributes: { title: data.title, description: data.description },
       geometry: { type: "polyline", paths: data.paths },
@@ -95,8 +95,8 @@ require([
       symbol: {
         type: "picture-marker",
         url: data.url,
-        width: "8px",
-        height: "8px",
+        width: "30px",
+        height: "30px",
       },
 
       geometry: { type: "point", x: data.paths[0], y: data.paths[1] },
