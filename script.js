@@ -7,7 +7,7 @@ require([
 ], function (Map, MapView, SceneView, Graphic, GraphicsLayer) {
   // khởi tạo map
   const map = new Map({
-    basemap: "dark-gray-vector",
+    basemap: "streets-navigation-vector",
   });
 
   // biến lưu giá trị camera (độ zoom, tọa độ, góc nhìn) cho view 3D
@@ -29,7 +29,7 @@ require([
   const mapView = new MapView({
     container: "viewDiv",
     map: map,
-    zoom: 12,
+    zoom: 13,
     center: [106.66522107272267, 10.872924838210652],
   });
 
@@ -77,7 +77,7 @@ require([
     return new Graphic({
       symbol: {
         type: "simple-line",
-        color: useDataColors ? data.color : [128, 39, 245],
+        color: useDataColors ? data.color : [217, 212, 212],
         width: 5,
       },
       attributes: { title: data.title, description: data.description },
@@ -95,28 +95,30 @@ require([
       symbol: {
         type: "picture-marker",
         url: data.url,
-        width: "30px",
-        height: "30px",
+        width: "50px",
+        height: "50px",
       },
       geometry: { type: "point", x: data.paths[0], y: data.paths[1] },
       attributes: {
         ...data,
-        // đảm bảo có các field sau:
         description: data.description ?? "",
-        img1:
-          data.img1 ??
-          window.location.origin + "/images/vo_truong_toan_thpt.png",
+        image: data.image ?? "",
       },
       popupTemplate: {
         title: "{title}",
         content: [
           {
+            type: "text",
+            text: `<div style="font-size:18px;font-weight:600;line-height:1.3;">
+               {description}
+             </div>`,
+          },
+          {
             type: "media",
             mediaInfos: [
               {
                 type: "image",
-                caption: "{description}",
-                value: { sourceURL: "{img1}" }, // chỉ tham chiếu TÊN field trong {}
+                value: { sourceURL: "{image}" },
               },
             ],
           },

@@ -1,0 +1,16 @@
+{
+  "region": "Đông Nam Bộ",
+  "title": "Phường Bình Thạnh, Quận Bình Thạnh, TP. Hồ Chí Minh",
+  "description": "Một phân khúc đường Bùi Đình Túy",
+  "color": [255, 255, 0],
+  "paths": [
+          [
+            106.6993146432248,
+            10.807413594022066
+          ],
+          [
+            106.70926332615687,
+            10.808380404573185
+          ]
+  ]
+}
