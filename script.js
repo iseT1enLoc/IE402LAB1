@@ -77,8 +77,8 @@ require([
     return new Graphic({
       symbol: {
         type: "simple-line",
-        color: useDataColors ? data.color : [255, 180, 0],
-        width: 3,
+        color: useDataColors ? data.color : [128, 39, 245],
+        width: 5,
       },
       attributes: { title: data.title, description: data.description },
       geometry: { type: "polyline", paths: data.paths },
@@ -90,23 +90,39 @@ require([
   };
 
   // vẽ Point
-  const drawPoint = (data) => {
-    return new Graphic({
+  const drawPoint = (data) =>
+    new Graphic({
       symbol: {
         type: "picture-marker",
         url: data.url,
         width: "30px",
         height: "30px",
       },
-
       geometry: { type: "point", x: data.paths[0], y: data.paths[1] },
-      attributes: data,
+      attributes: {
+        ...data,
+        // đảm bảo có các field sau:
+        description: data.description ?? "",
+        img1:
+          data.img1 ??
+          window.location.origin + "/images/vo_truong_toan_thpt.png",
+      },
       popupTemplate: {
         title: "{title}",
-        content: "<a>{description}</a>",
+        content: [
+          {
+            type: "media",
+            mediaInfos: [
+              {
+                type: "image",
+                caption: "{description}",
+                value: { sourceURL: "{img1}" }, // chỉ tham chiếu TÊN field trong {}
+              },
+            ],
+          },
+        ],
       },
     });
-  };
 
   // tạo phân lớp đa giác
   const polygonsLayer = new GraphicsLayer();
