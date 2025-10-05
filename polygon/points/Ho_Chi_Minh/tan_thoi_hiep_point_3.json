@@ -2,6 +2,7 @@
   "region": "Đông Nam Bộ",
   "title": "Phường Tân Thới Hiệp, Quận 12, TP. Hồ Chí Minh",
   "description": "Trường THPT Võ Trường Toản",
-  "url": "./images/vo_truong_toan_thpt.png",
+  "url": "./images/icon/school_icon.png",
+  "image":"./images/vo_truong_toan_thpt.png",
   "paths":  [106.6454270933437,10.87232803703533]
 }
