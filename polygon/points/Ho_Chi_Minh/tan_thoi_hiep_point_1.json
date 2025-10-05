@@ -2,6 +2,7 @@
   "region": "Đông Nam Bộ",
   "title": "Phường Tân Thới Hiệp, Quận 12, TP. Hồ Chí Minh",
   "description": "Trạm Biến Áp 220kV",
-  "url": "./images/tram_bien_ap.jpg",
+  "url": "./image/nha_may_dien_icon.png",
+  "image":"./images/tram_bien_ap.jpg",
   "paths": [106.64024826352318,10.859686520658087]
 }
