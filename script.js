@@ -7,7 +7,7 @@ require([
 ], function (Map, MapView, SceneView, Graphic, GraphicsLayer) {
   // khởi tạo map
   const map = new Map({
-    basemap: "dark-gray-vector",
+    basemap: "streets-navigation-vector",
   });
 
   // biến lưu giá trị camera (độ zoom, tọa độ, góc nhìn) cho view 3D
@@ -29,7 +29,7 @@ require([
   const mapView = new MapView({
     container: "viewDiv",
     map: map,
-    zoom: 12,
+    zoom: 13,
     center: [106.66522107272267, 10.872924838210652],
   });
 
@@ -77,8 +77,8 @@ require([
     return new Graphic({
       symbol: {
         type: "simple-line",
-        color: useDataColors ? data.color : [255, 180, 0],
-        width: 3,
+        color: useDataColors ? data.color : [217, 212, 212],
+        width: 5,
       },
       attributes: { title: data.title, description: data.description },
       geometry: { type: "polyline", paths: data.paths },
@@ -90,23 +90,41 @@ require([
   };
 
   // vẽ Point
-  const drawPoint = (data) => {
-    return new Graphic({
+  const drawPoint = (data) =>
+    new Graphic({
       symbol: {
         type: "picture-marker",
         url: data.url,
-        width: "30px",
-        height: "30px",
+        width: "50px",
+        height: "50px",
       },
-
       geometry: { type: "point", x: data.paths[0], y: data.paths[1] },
-      attributes: data,
+      attributes: {
+        ...data,
+        description: data.description ?? "",
+        image: data.image ?? "",
+      },
       popupTemplate: {
         title: "{title}",
-        content: "<a>{description}</a>",
+        content: [
+          {
+            type: "text",
+            text: `<div style="font-size:18px;font-weight:600;line-height:1.3;">
+               {description}
+             </div>`,
+          },
+          {
+            type: "media",
+            mediaInfos: [
+              {
+                type: "image",
+                value: { sourceURL: "{image}" },
+              },
+            ],
+          },
+        ],
       },
     });
-  };
 
   // tạo phân lớp đa giác
   const polygonsLayer = new GraphicsLayer();
