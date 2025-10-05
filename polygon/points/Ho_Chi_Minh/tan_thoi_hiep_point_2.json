@@ -2,6 +2,7 @@
   "region": "Đông Nam Bộ",
   "title": "Phường Tân Thới Hiệp, Quận 12, TP. Hồ Chí Minh",
   "description": "Trường Mầm Non Họa Mi 2",
-  "url": "./images/truong_mam_non.jpg",
+  "url": "./images/icon/school_icon.png",
+  "image":"./images/truong_mam_non_hoa_mi_hai.jpg",
   "paths":   [106.64063206975186,10.87757454815538]
 }
