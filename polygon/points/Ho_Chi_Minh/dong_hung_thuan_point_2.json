@@ -2,6 +2,7 @@
   "region": "Đông Nam Bộ",
   "title": "Phường Đông Hưng Thuận, Quận 12, TP. Hồ Chí Minh",
   "description": "Trường THCS & THPT Nam Việt",
-  "url": "./images/truong_nam_viet.jpg",
-  "paths": [106.60871954304241, 10.834036248399428]
+  "url": "./images/icon/school_icon.png",
+  "paths": [106.60871954304241, 10.834036248399428],
+  "image": "./images/truong_nam_viet.jpg"
 }
