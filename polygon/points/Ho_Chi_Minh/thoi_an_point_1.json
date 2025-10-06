@@ -2,6 +2,7 @@
   "region": "Đông Nam Bộ",
   "title": "Phường Thới An, Quận 12, TP. Hồ Chí Minh",
   "description": "Trường Tiểu học Kim Đồng",
-  "url": "./images/truong_th_kim_dong.png",
+  "image": "./images/truong_th_kim_dong.png",
+  "url": "./images//icon/school_icon.png",
   "paths": [106.65809157817898, 10.865118927982195]
 }
