@@ -1,0 +1,16 @@
+{
+  "region": "Đông Nam Bộ",
+  "title": "Phường Bình Thạnh, Quận Bình Thạnh, TP. Hồ Chí Minh",
+  "description": "Một phân khúc đường Nguyễn Xí",
+  "color": [255, 255, 0],
+  "paths": [
+          [
+            106.71250329907161,
+            10.809978837580246
+          ],
+          [
+            106.70594325110136,
+            10.81727295655837
+          ]
+  ]
+}
