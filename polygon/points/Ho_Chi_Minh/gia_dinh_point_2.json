@@ -2,6 +2,7 @@
   "region": "Đông Nam Bộ",
   "title": "Phường Gia Định, TP. Hồ Chí Minh",
   "description": "Đại học Kinh tế - Tài chính TP. Hồ Chí Minh",
-  "url": "./images/uef.png",
-  "paths": [106.70679677427927, 10.798957640984327]
+  "url": "./images/icon/school_icon.png",
+  "paths": [106.70679677427927, 10.798957640984327],
+  "image": "./images/uef.png"
 }

@@ -2,6 +2,7 @@
   "region": "Đông Nam Bộ",
   "title": "Phường Gia Định, TP. Hồ Chí Minh",
   "description": "Bệnh viện Đa khoa Bình Thạnh",
-  "url": "./images/benh-vien-da-khoa-binh-thanh.png",
-  "paths": [106.69667642815239, 10.798082320837295]
+  "url": "./images/icon/hospital-icon.png",
+  "paths": [106.69667642815239, 10.798082320837295],
+  "image": "./images/benh-vien-da-khoa-binh-thanh.png"
 }
