@@ -2,6 +2,7 @@
   "region": "Đông Nam Bộ",
   "title": "Phường Thới An, Quận 12, TP. Hồ Chí Minh",
   "description": "Công ty TNHH Nhà Máy Bia HEINEKEN Việt Nam",
-  "url": "./images/cong_ty_nha_may_bia_heineken.jpg",
+  "url": "./images//icon/nha_may.png",
+  "image": "./images/cong_ty_nha_may_bia_heineken.jpg",
   "paths": [106.65207859697762, 10.868768071765885]
 }

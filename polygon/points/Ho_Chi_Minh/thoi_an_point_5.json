@@ -2,6 +2,7 @@
   "region": "Đông Nam Bộ",
   "title": "Phường Thới An, Quận 12, TP. Hồ Chí Minh",
   "description": "Trường THCS Tô Ngọc Vân",
-  "url": "./images/truong-thcs-to-ngoc-van.jpg",
+  "url": "./images//icon/school_icon.png",
+  "image": "./images/truong-thcs-to-ngoc-van.jpg",
   "paths": [106.68307024052831, 10.89180537349334]
 }
