@@ -4,6 +4,6 @@
   "description": "Bệnh viện đa khoa Hồng Đức",
   "url": "./images/icon/hospital-icon.png",
   "paths": [106.70427626280511, 10.853433486774186],
-  "image": "/images/hongduc_hospital.jpg"
+  "image": "./images/hongduc_hospital.jpg"
 
 }

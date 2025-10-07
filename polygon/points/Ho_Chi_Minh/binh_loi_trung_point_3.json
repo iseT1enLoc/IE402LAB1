@@ -1,7 +1,8 @@
 {
   "region": "Đông Nam Bộ",
   "title": "Phường Bình Lợi Trung, Quận 12, TP. Hồ Chí  Minh",
-  "description": "Trường THPT Trần Văn Dầu",
-  "url": "./images/truong_hoc.png",
+  "description": "Trường THPT Trần Văn Giàu",
+  "images":"./images/thpt_tran_van_dau.jpg",
+  "url": "./images/icon/school_icon.png",
   "paths": [106.69947001967267, 10.830937477194922]
 }
