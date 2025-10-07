@@ -2,6 +2,7 @@
   "region": "Đông Nam Bộ",
   "title": "Phường Trung Mỹ Tây, Quận 12, TP. Hồ Chí Minh",
   "description": "Bệnh viện Trung Mỹ Tây",
-  "url": "./images/benh_vien.png",
+  "url": "./images/icon/hospital-icon.png",
+  "image": "./images/benh_vien_trung_my_tay.webp",
   "paths": [106.63060126156569, 10.860861821599315]
 }

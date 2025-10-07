@@ -2,6 +2,7 @@
   "region": "Đông Nam Bộ",
   "title": "Phường Trung Mỹ Tây, Quận 12, TP. Hồ Chí Minh",
   "description": "Đại Học Hoa Sen - Cơ Sở Quang Trung 2",
-  "url": "./images/dh_hoa_sen.png",
+  "url": "./images/icon/school_icon.png",
+  "image": "./images/dai_hoc_hoa_sen.jpg",
   "paths": [106.62523910999494, 10.856922912821148]
 }
