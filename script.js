@@ -10,20 +10,7 @@ require([
     basemap: "streets-navigation-vector",
   });
 
-  // biến lưu giá trị camera (độ zoom, tọa độ, góc nhìn) cho view 3D
-  let cameraPosition = {
-    position: { longitude: 105.5474137, latitude: 4.0241589, z: 450000 },
-    tilt: 55,
-  };
 
-  // hiển thị view 3D
-  const sceneView = new SceneView({
-    container: null,
-    map: map,
-    viewingMode: "global",
-    camera: cameraPosition,
-    qualityProfile: "high",
-  });
 
   // hiển thị view 2D
   const mapView = new MapView({
@@ -135,8 +122,8 @@ require([
   // tạo phân lớp điểm
   const pointsLayer = new GraphicsLayer();
 
-  //lấy dữ liệu tọa độ các tỉnh từ ./polygon/provinces/index.json
-  function fetchProvinceData(currentRegion) {
+  //lấy dữ liệu tọa độ các phường từ ./polygon/wards/ho_chi_minh/index.json
+  function fetchWardData(currentRegion) {
     fetch("polygon/wards/ho_chi_minh/index.json")
       .then((res) => {
         return res.json();
@@ -158,7 +145,7 @@ require([
       );
   }
 
-  // lấy dữ liệu các đường đi từ ./polygon/roads/index.json
+  // lấy dữ liệu các đường đi từ ./polygon/roads/Ho_Chi_Minh/index.json
   function fetchRoadData(useDataColors, currentRegion) {
     fetch("polygon/roads/Ho_Chi_Minh/index.json")
       .then((res) => {
@@ -213,7 +200,7 @@ require([
   let region = "Cả nước";
 
   // fetch data lần đầu
-  fetchProvinceData(region);
+  fetchWardData(region);
   fetchRoadData(useRoadColor, region);
   fetchPointsData(region);
 
@@ -228,39 +215,6 @@ require([
       fetchRoadData(this.checked, region);
       useRoadColor = this.checked;
     });
-
-  // hàm đổi khu vực hiển thị các thông tin địa lý
-  window.changeDisplayRegion = function (currentRegion) {
-    // xóa các lớp để vẽ mới lại
-    polygonsLayer.removeAll();
-    arcsLayer.removeAll();
-    pointsLayer.removeAll();
-
-    // thêm dữ liệu lại để vẽ mới
-    fetchProvinceData(currentRegion);
-    fetchRoadData(useRoadColor, currentRegion);
-    fetchPointsData(currentRegion);
-
-    // ghi nhận lại region hiện tại
-    region = currentRegion;
-  };
-
-  // xử lý event khi chuyển đổi 2D <-> 3D
-  document.getElementById("toggleBtn").addEventListener("click", function () {
-    if (mapView.container) {
-      // đổi sang 3D
-      mapView.container = null; // xóa view
-      sceneView.container = "viewDiv"; // gán view mới
-      sceneView.goTo(cameraPosition, { animate: false });
-      this.innerText = "Đổi sang 2D";
-    } else {
-      //đổi sang 2D
-      cameraPosition = sceneView.camera.clone();
-      sceneView.container = null;
-      mapView.container = "viewDiv";
-      this.innerText = "Đổi sang 3D";
-    }
-  });
 
   // đổi basemap
   window.changeBasemap = function (basemap) {
